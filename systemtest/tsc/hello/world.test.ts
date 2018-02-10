@@ -16,7 +16,7 @@ describe("Hello World", () => {
             browserPromise.then(browser => browser.close())
         ])
     );
-    const resultsSelector = '.hello';
+    const resultsSelector = '.reactRouter';
     it("includes hello", () => serverPromise.then(server =>
         browserPromise.then(browser =>
             browser.newPage()
@@ -27,4 +27,15 @@ describe("Hello World", () => {
                 )
         )
     ))
+    it("includes hello to ", () => serverPromise.then(server =>
+        browserPromise.then(browser =>
+            browser.newPage()
+                .then(page => page.goto(`http://127.0.0.1:${server.address().port}/hello/World`)
+                    .then(() => page.waitForSelector(resultsSelector))
+                    .then(() => page.content())
+                    .then(text => expect(text).toEqual(expect.stringContaining("Hello World")))
+                )
+        )
+    ))
+
 })

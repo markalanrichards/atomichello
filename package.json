@@ -3,15 +3,18 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "goal:build" : "npm run step:tsc && npm run step:webpack",
+    "goal:build": "npm run step:rimraf && npm run step:tsc && npm run step:webpack",
     "goal:start": "npm run goal:build  && node systemtest/genjs/main.js",
     "goal:test": "npm run goal:build && jest",
-
+    "goal:rimraf": "npm run step:rimraf",
+    "step:rimraf":"npm run task:rimraf-app && npm run task:rimraf-systemtest && npm run task:rimraf-webpack",
     "step:tsc": "npm run task:tsc-app && npm run task:tsc-systemtest",
     "step:webpack": "webpack",
-
-    "task:tsc-app" :"tsc -p app",
-    "task:tsc-systemtest": "tsc -p systemtest"
+    "task:tsc-app": "tsc -p app",
+    "task:tsc-systemtest": "tsc -p systemtest",
+    "task:rimraf-app": "rimraf app/genjs",
+    "task:rimraf-systemtest": "rimraf app/genjs",
+    "task:rimraf-webpack": "rimraf webpack"
   },
   "repository": {
     "type": "git",
@@ -38,6 +41,7 @@
     "react-dom": "16.2.0",
     "react-router": "4.2.0",
     "react-router-dom": "4.2.2",
+    "rimraf": "2.6.2",
     "ts-jest": "22.0.3",
     "typescript": "2.7.1",
     "webpack": "3.11.0"
