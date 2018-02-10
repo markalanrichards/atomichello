@@ -1,2 +1,2 @@
 import * as React from  'react';
-export default <div>hello</div>
+export const Hello =  <div>hello</div>
